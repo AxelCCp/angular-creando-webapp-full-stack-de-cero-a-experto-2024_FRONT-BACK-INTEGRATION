@@ -1,0 +1,121 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+    /*height:100%;
+    width: 100%;
+    margin:0;
+    display: flex;
+    flex-direction: column;*/
+    /*background: rgb(32, 32, 32);*/
+    background: url('./images/maxresdefault.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.divError {
+    /*background-color: rgb(255, 255, 177); */
+    background:rgb(255, 169, 169, 0.85); 
+    border-radius: 7px; 
+    line-height: 35px;
+    width: 70%;
+}
+
+.spanError {
+    margin-left: 30px; 
+    font-weight: bold;
+}
+
+.divTitleH3 {
+    font-family: Helvetica, Arial;
+    background-color: rgb(233, 233, 233);
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 45px;
+    align-content: center;
+}
+
+
+footer {
+    background-color: rgb(233, 233, 233); 
+    font-family: Helvetica, Arial;
+    height: 35px;
+    margin:  0px auto;
+    margin-bottom: 5px;
+    line-height: 35px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 95%;
+    margin-left: 50px;
+}
+
+.spanFooter {
+    margin-left: 20px; 
+    color: rgb(73, 73, 73);
+}
+
+
+/*101 - modal*/
+
+.abrir-modal {
+    background-color: rgba(43, 42, 42, 0.5);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+ 
+.animacion {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+}
+ 
+.fadeIn {
+    animation-name: fadeIn;
+    -webkit-animation-name: fadeIn;
+}
+ 
+@keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+ 
+    to {
+        opacity: 1
+    }
+}
+ 
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+ 
+    to {
+        opacity: 1
+    }
+}
+
+
+
+/**/
+
+.contentModalUsers {
+    background-color: rgb(68, 68, 68); 
+    margin-top: 355px;
+    color: azure;
+}
+
+
+.inputForm {
+    background: rgba(255, 255, 255, 0.75);
+}

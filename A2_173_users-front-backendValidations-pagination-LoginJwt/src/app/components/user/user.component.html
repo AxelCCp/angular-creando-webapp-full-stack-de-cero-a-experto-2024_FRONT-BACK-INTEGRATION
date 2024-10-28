@@ -1,0 +1,48 @@
+<div class="divTitleH3">
+    <h3 class="my-1 m-3">Registered users</h3>
+</div>
+
+
+<button class="btn btn-primary my-3" [routerLink]="['/users/create']">Create new user</button>
+
+
+@if(users.length == 0) {
+
+    <div class="alert" style="background-color: rgb(233, 233, 233); border-radius: 7px;">No hay registros en el sistema!</div>
+
+} @else {
+
+    <table class="table table-hover opacity-75 mt-4">
+        <thead>
+            <tr>
+                <th>Remove</th>
+                <!--<th>id</th>-->
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (user of users; track $index) {
+                <tr>
+                    <td>
+                        <button class="btn btn-outline-danger" (click)="onRemoveUser(user.id)">X</button>
+                    </td>
+                    <!--<td> {{user.id}} </td> -->
+                    <td> {{user.name}} </td>
+                    <td> {{user.lastname}} </td>
+                    <td> {{user.email}} </td>
+                    <td> {{user.username}} </td>
+                    <td>
+                        <button class="btn btn-outline-primary" [routerLink]="['/users/edit', user.id]" >update</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <paginator [paginator]="paginator" [url]="'/users/page'"/>
+
+}
