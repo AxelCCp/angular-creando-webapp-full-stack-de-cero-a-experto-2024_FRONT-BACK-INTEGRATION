@@ -1,0 +1,40 @@
+
+@if(paginator.totalPages > 1) {
+
+
+    <ul class="pagination">
+
+        <li class="page-item">          
+            <a class="page-link" [routerLink]="[url, 0]">first</a>          <!-- url se pasa de forma estatica a paginator.component en user.component.html-->
+        </li>
+
+        @if(paginator.number > 0){
+            <li class="page-item">
+                <a class="page-link" [routerLink]="[url, paginator.number-1]">back</a>
+            </li>
+        } @else {
+            <li class="page-item disabled">
+                <a class="page-link">back</a>
+            </li>
+        }
+
+        @if(paginator.number <  paginator.totalPages-1) {
+            <li class="page-item">
+                <a class="page-link" [routerLink]="[url, paginator.number+1]">next</a>
+            </li>
+        } @else {
+            <li class="page-item disabled">
+                <a class="page-link">next</a>
+            </li> 
+        }
+        
+        
+        <li class="page-item">
+            <a class="page-link" [routerLink]="[url, paginator.totalPages-1]">last</a>
+        </li>
+    
+    </ul>
+
+
+}
+

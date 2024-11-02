@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { SharingDataService } from '../../services/sharing-data.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'user-app',
@@ -24,7 +25,8 @@ export class UserAppComponent implements OnInit{
   constructor(private router : Router,
               private service : UserService,
               private sharingData : SharingDataService,
-              private route : ActivatedRoute) {}
+              private route : ActivatedRoute,
+              private authservice : AuthService) {}
   
   ngOnInit(): void {
     //sin paginacion
@@ -42,7 +44,58 @@ export class UserAppComponent implements OnInit{
     this.removeUser();
     this.findUserById();                                                        //109 - se suscribe este metodo.
     this.pageUserEvent();                                                       //143 - se suscribe el metodo para escuchar el cambio de pagina.
+    this.handlerLogin();                                                             //176 - se suscribe este metodo.
   }
+
+
+  //176 - escuchando el _handlerLoginEventEmiter
+  handlerLogin() {
+    this.sharingData.handlerLoginEventEmiter.subscribe(({username, password}) => {                //{username, password}  : se desestructura.
+      console.log(username + ' ' + password);
+      this.authservice.loginUser({username, password}).subscribe(
+        
+      { 
+        next : response => {
+
+          const token = response.token;
+          console.log(token);
+          
+          const payload = this.authservice.getPayload(token);     
+          console.log(payload);
+
+          const user = {username : payload.sub};    //179 sub : de subject.
+
+          const login = {
+            user,
+            isAuth : true,
+            isAdmin : payload.isAdmin
+          }
+
+          this.authservice.token = token;
+
+          this.authservice.user = login;
+
+          this.router.navigate(['/users/page/0']);
+
+        },
+
+        error : error => {
+          
+          if(error.status == 401) {
+            console.log(error.error);
+            Swal.fire('Login error', error.error.message, 'error');
+          } else {
+            throw error;
+          }
+
+        }
+      }
+
+      );
+
+    });
+
+  } 
 
 
   //143 - el compoenente se pone a la escucha del cambio de pagina del paginador. Esto para tener los id de los usuarios q aparecen en la lista segun n° de pagina.
